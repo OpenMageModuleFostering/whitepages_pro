@@ -1,0 +1,123 @@
+/**
+ * @category	Wp
+ * @package		Wp_Whitepages
+ * @author		WhitePages <support@whitepages.com>
+ * @copyright	WhitePages Inc. (c) 2013
+ *
+ * THIS SOFTWARE AND RELATED SERVICE IS PROVIDED ON AN “AS IS” BASIS. TO THE FULLEST EXTENT
+ * PERMISSIBLE, WHITEPAGES AND ITS AFFILIATES DISCLAIM ALL WARRANTIES OF ANY KIND, EXPRESS
+ * OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, WARRANTIES OF TITLE, NONINFRINGEMENT AND IMPLIED
+ * WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSEOR THOSE ARISING FROM
+ * COURSE OF DEALING OR USAGE OF TRADE.  WITHOUT LIMITING THE FOREGOING, WHITEPAGES MAKES NO
+ * REPRESENTATIONS THAT (I) THE SOFTWARE OR RELATED SERVICE WILL MEET YOUR REQUIREMENTS OR BE
+ * ACCURATE, COMPLETE, RELIABLE OR ERROR FREE; (II) THAT THE SOFTWARE OR RELATED SERVICE
+ * ALWAYS BE AVAILABLE OR WILL BE UNINTERRUPTED, ACCESSIBLE, TIMELY, RESPONSIVE OR SECURE; OR
+ * (III) THAT ANY DEFECTS WILL BE CORRECTED, OR THAT THE SOFTWARE OR RELATED SERVICE WILL BE
+ * FREE FROM VIRUSES, “WORMS,” “TROJAN HORSES” OR OTHER HARMFUL PROPERTIES.  YOU EXPRESSLY
+ * AGREE THAT USE IS AT YOUR SOLE RISK AND THAT YOU WILL BE SOLELY RESPONSIBLE FOR ANY DAMAGE
+ * TO YOUR COMPUTER SYSTEM OR LOSS OF DATA THAT RESULTS FROM AND FOR ANY DISCLOSURE OF
+ * INFORMATION THAT YOU UNDERTAKE WHILE USING THE SOFTWARE OR RELATED SERVICE.  IN NO EVENT
+ * SHALL WHITEPAGES OR ITS AFFILIATES BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHERLIABILITY,
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,OUT OF OR IN CONNECTION
+ * WITH THE SOFTWARE OR RELATED SERVICE.
+ * 
+ */
+
+/* Styles For Autocomplete */
+
+.whitepages-autocomplete-fields
+{
+	background: #fafafa;
+	border: 1px solid #d6d6d6;
+	left: 50%;
+	margin: 0 0 0 -325px;
+	position: fixed;
+	top: 50%;
+	width: 650px;
+	z-index: 400;
+}
+
+.whitepages-autocomplete-fields .grid
+{
+	height: 310px;
+	overflow-y: scroll;
+}
+
+.whitepages-autocomplete-fields .send-autocomplete
+{
+	width: 100px;
+	vertical-align: middle;
+}
+
+.whitepages-autocomplete-fields .close
+{
+	margin-left: 20px;
+}
+
+/* Styles for MatchScore */
+
+.grade-A
+{
+	color:green;
+}
+
+.grade-B,.grade-C
+{
+	color:black;
+}
+
+.grade-D, .grade-E, .grade-F
+{
+	color:red;
+}
+
+
+.matchscore .overall-grade
+{
+	width: 215px; 
+}
+
+.matchscore .overall-grade div
+{
+	width: 200px; 
+	height: 75px; 
+	background-color: lightgray; 
+	text-align: center; 
+	line-height: 75px; 
+	-moz-border-radius: 10px; 
+	-webkit-border-radius: 10px; 
+	-khtml-border-radius: 10px; 
+	border-radius: 10px;
+}
+
+.matchscore .overall-grade div span
+{
+	font-size: 40px;
+	font-weight: bold;
+}
+
+.columns .matchscore .form-list 
+{
+	width: 100%;
+}
+.matchscore td
+{
+	padding-bottom: 5px;
+}
+
+.matchscore td.label
+{
+	width: 75px;
+}
+
+.matchscore .wp-logo
+{
+	position: relative;
+	top: -15px;
+	width: 263px;
+}
+
+.matchscore .wp-logo img
+{
+	float: right;
+}

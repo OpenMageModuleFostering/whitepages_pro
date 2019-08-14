@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<tabs>
+		<wp translate="label" module="whitePages">
+			<label>WhitePages PRO</label>
+			<sort_order>100</sort_order>
+		</wp>
+	</tabs>
+	<sections>
+		<whitePages_configuration translate="label" module="whitePages">
+			<label>WhitePages PRO</label>
+			<tab>wp</tab>
+			<frontend_type>text</frontend_type>
+			<sort_order>1000</sort_order>
+			<show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+          	<groups>
+                <options translate="label">
+					<label>Options</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>   
+                    <fields>
+					   	<api_key>
+					        <label>API Key</label>
+					        <frontend_type>obscure</frontend_type>
+                          	<backend_model>adminhtml/system_config_backend_encrypted</backend_model>
+					        <sort_order>1</sort_order>
+					        <show_in_default>1</show_in_default>
+					        <show_in_website>1</show_in_website>
+					        <show_in_store>1</show_in_store>
+					        <comment>You must save this Magento configuration before validating your API Key</comment>              
+					    </api_key>
+					    <api_url>
+					        <label></label>
+					        <frontend_class>complex</frontend_class>
+                    		<frontend_model>whitePages/adminhtml_system_config_options_button</frontend_model>
+					        <sort_order>5</sort_order>
+					        <show_in_default>1</show_in_default>
+					        <show_in_website>1</show_in_website>
+					        <show_in_store>1</show_in_store>
+					      	<comment><![CDATA[Click <a target="_blank" href="http://pro.whitepages.com/magento">here</a> to obtain your own API Key.]]></comment>            
+					    </api_url>
+					</fields>           
+      			</options>
+      			<match_score>
+      				<label>MatchScore</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+      					<decline>
+							<label>Decline Orders with Scores Below</label>
+							<frontend_type>select</frontend_type>
+							<source_model>whitePages/system_config_source_matchScore</source_model>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>Setting this value to anything but 'Accept All Orders" will cause orders for customers to be declined.</comment>
+						</decline>
+						<message>
+							<label>Decline Message</label>
+							<frontend_type>textarea</frontend_type>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</message>
+					</fields>
+				</match_score>
+      			<reverse_lookup>
+      				<label>Customer Look Up</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>30</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+      					<enabled>
+							<label>Enabled</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>25</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</enabled>
+					</fields>
+				</reverse_lookup>
+            </groups>
+		</whitePages_configuration>
+	</sections>
+</config>

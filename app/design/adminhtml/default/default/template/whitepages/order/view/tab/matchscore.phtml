@@ -1,0 +1,149 @@
+<?php
+/**
+ * @category	Wp
+ * @package		Wp_Whitepages
+ * @author		WhitePages <support@whitepages.com>
+ * @copyright	WhitePages Inc. (c) 2013
+ *
+ * THIS SOFTWARE AND RELATED SERVICE IS PROVIDED ON AN “AS IS” BASIS. TO THE FULLEST EXTENT
+ * PERMISSIBLE, WHITEPAGES AND ITS AFFILIATES DISCLAIM ALL WARRANTIES OF ANY KIND, EXPRESS
+ * OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, WARRANTIES OF TITLE, NONINFRINGEMENT AND IMPLIED
+ * WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSEOR THOSE ARISING FROM
+ * COURSE OF DEALING OR USAGE OF TRADE.  WITHOUT LIMITING THE FOREGOING, WHITEPAGES MAKES NO
+ * REPRESENTATIONS THAT (I) THE SOFTWARE OR RELATED SERVICE WILL MEET YOUR REQUIREMENTS OR BE
+ * ACCURATE, COMPLETE, RELIABLE OR ERROR FREE; (II) THAT THE SOFTWARE OR RELATED SERVICE
+ * ALWAYS BE AVAILABLE OR WILL BE UNINTERRUPTED, ACCESSIBLE, TIMELY, RESPONSIVE OR SECURE; OR
+ * (III) THAT ANY DEFECTS WILL BE CORRECTED, OR THAT THE SOFTWARE OR RELATED SERVICE WILL BE
+ * FREE FROM VIRUSES, “WORMS,” “TROJAN HORSES” OR OTHER HARMFUL PROPERTIES.  YOU EXPRESSLY
+ * AGREE THAT USE IS AT YOUR SOLE RISK AND THAT YOU WILL BE SOLELY RESPONSIBLE FOR ANY DAMAGE
+ * TO YOUR COMPUTER SYSTEM OR LOSS OF DATA THAT RESULTS FROM AND FOR ANY DISCLOSURE OF
+ * INFORMATION THAT YOU UNDERTAKE WHILE USING THE SOFTWARE OR RELATED SERVICE.  IN NO EVENT
+ * SHALL WHITEPAGES OR ITS AFFILIATES BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHERLIABILITY,
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,OUT OF OR IN CONNECTION
+ * WITH THE SOFTWARE OR RELATED SERVICE.
+ * 
+ */
+?>
+<?php $hasMatchScore = $this->hasMatchScore()?>
+<div class="matchscore">
+	<?php if($hasMatchScore == true):?>
+		<?php $matchSCore = $this->getMatchScore()?>
+		<?php $detailedMatchScore = $this->getDetailedMatchScore()?>
+		<?php $transactionDetails = $this->getTransactionDetails()?>
+		<div class="entry-edit ">
+			<div class="entry-edit-head">
+				<h4 class="icon-head"><?php echo $this->__('Overall MatchScore')?></h4>
+			</div>
+			<fieldset >
+				<div>
+					<table cellspacing="2" class="box-left form-list">
+						<tbody>
+							<tr>
+								<td>
+									<strong>
+										<?php echo $this->__('MatchScore Grade')?>:
+									</strong>
+								</td>
+								<td>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<table>
+										<tbody>
+											<tr>
+												<td class="overall-grade">
+													<div>
+														<span class="grade-<?php echo $matchSCore->getGrade() ?>" ><?php echo $matchSCore->getGrade() ?></span>
+													</div>
+												</td>
+												<td class="label"><strong><?php echo $this->__('MatchScore')?></strong></td>
+												<td class="value"><?php echo number_format($matchSCore->getScore(), 2) ?></td>
+											</tr>
+										</tbody>
+									</table>
+								</td>
+								<td class="wp-logo"> <img alt="<?php echo $this->__('WhitePages PRO') ?>" src="<?php echo $this->getSkinUrl('images/WPPRO-blue.png') ?>" /></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				
+			</fieldset>
+		</div>
+		<div class="entry-edit">
+			<div class="entry-edit-head">
+				<h4 class="icon-head"><?php echo $this->__('Match Details')?></h4>
+			</div>
+			<fieldset>
+				<div class="box-left">
+					<table cellspacing="2" class="data">
+						<tbody>
+							<tr>
+								<td style="width: 150px;"><strong><?php echo $this->__('Billing Info')?></strong></td>
+								<td style="width: 25px;"></td>
+								<td></td>
+							</tr>
+							<?php foreach ($detailedMatchScore['billing'] as $key => $value):?>
+								<?php if($key !='family'): //removing family temporarily until the data gets fixed in the WP API  ?>
+									<tr>
+										<td><?php echo $this->getMatchScoreLabel($key)?></td>
+										<?php if($key =='family'):?>
+											<td><strong><?php echo count($value['names'])?></strong></td>
+											<td><?php echo (count($value['names']) > 1 ? " (". $this->getFamilyNames($value['names']). ")": '')?></td>
+										<?php else :?>
+											<td><strong class="grade-<?php echo $value['grade'] ?>"><?php echo $value['grade']?></strong></td>
+											<td><?php echo ($value['messages'] != null ? " (". implode(',', $value['messages']).")" : '')?></td>
+										<?php endif;?>
+									</tr>
+								<?php endif;?>
+							<?php endforeach;?>
+							<tr>
+								<td><br /></td>
+								<td> </td></tr>
+							<tr>
+								<td><strong><?php echo $this->__('Shipping Info')?></strong></td>
+								<td></td>
+							</tr>
+							<?php foreach ($detailedMatchScore['shipping'] as $key => $value):?>
+							
+								<?php if($key !='family'): //removing family temporarily until the data gets fixed in the WP API  ?>
+									<tr>
+										<td><?php echo $this->getMatchScoreLabel($key)?></td>
+										<?php if($key =='family'):?>
+											<td><strong><?php echo count($value['names'])?></strong></td>
+											<td><?php echo (count($value['names']) > 1 ? " (". $this->getFamilyNames($value['names']). ")": '')?></td>
+										<?php else :?>
+											<td><strong class="grade-<?php echo $value['grade'] ?>"><?php echo $value['grade']?></strong></td>
+											<td><?php echo ($value['messages'] != null ? " (". implode(',', $value['messages']).")" : '')?></td>
+										<?php endif;?>
+									</tr>
+								<?php endif;?>
+							<?php endforeach;?>
+						</tbody>
+					</table>
+				</div>
+			</fieldset>
+		</div>
+		<div class="entry-edit">
+			<div class="entry-edit-head">
+				<h4 class="icon-head"><?php echo $this->__('Transaction Details')?></h4>
+			</div>
+			<fieldset>
+				<div class="box-left">
+					<table cellspacing="2" class="data">
+						<tbody>
+							<tr>
+								<td style="width: 150px;"><?php echo $this->__('Transaction Id')?></td>
+								<td><?php echo $transactionDetails['transaction_id'] ?></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</fieldset>
+		</div>
+	<?php else:?>
+		<h1 class=""><?php echo $this->__('No MatchScore Available')?></h1>
+		<p><?php echo $this->__('This order was created prior to the WhitePages PRO module being installed.')?></p>
+	<?php endif;?>
+</div>

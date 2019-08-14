@@ -1,0 +1,16 @@
+{
+    "name": "OpenMageModuleFostering/WhitePages_PRO",
+    "type": "magento-module",
+    "license": "MITL",
+    "homepage": "",
+    "description": "Validates purchasers to prevent card-not-present fraud and improves efficiencies to streamline the manual order entry process.",
+    "authors": [
+    {
+        "name": "Matt Woodward",
+        "email": "mwoodward@whitepages.com"
+    }
+],
+    "suggest": {
+        "magento-hackathon/magento-composer-installer": "*"
+    }
+}

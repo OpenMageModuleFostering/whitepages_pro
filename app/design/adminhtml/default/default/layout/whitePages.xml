@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout version="0.0.1">
+
+	<WHITEPAGES_AUTOCOMPLETE_AJAX>
+			<block type="whitePages/adminhtml_sales_order_create_form_account_autocomplete" template="whitepages/order/create/form/account/autocomplete/results.phtml" name="autocomplete_results" output="toHtml" />
+	</WHITEPAGES_AUTOCOMPLETE_AJAX>
+
+	<!--  Sales views and over rides below -->
+	<adminhtml_sales_order_index>
+		<reference name="head">
+            <action method="addCss"><name>whitepages.css</name></action>
+    	</reference>
+    </adminhtml_sales_order_index>
+    <adminhtml_sales_order_view>
+		<reference name="head">
+            <action method="addCss"><name>whitepages.css</name></action>
+    	</reference>
+        <reference name="sales_order_tabs">
+            <action method="addTab">
+                <name>order_matchscore</name>
+                <block>whitePages/adminhtml_sales_order_tab_matchScore</block>
+            </action>
+        </reference>
+    </adminhtml_sales_order_view>
+
+	<adminhtml_sales_order_create_index>
+        <reference name="head">
+            <action method="addJs"><file>whitepages/autocompleteaddress.js</file></action>
+            <action method="addCss"><name>whitepages.css</name></action>
+    	</reference>
+    	
+    	<reference name="content">
+    		 <reference name="data">
+	    		<block type="adminhtml/sales_order_create_form_account" template="whitepages/order/create/form/account.phtml" name="form_account">
+	    			<block type="whitePages/adminhtml_sales_order_create_form_account_autocomplete" template="whitepages/order/create/form/account/autocomplete.phtml" name="form_account_autocomplete" />
+	    		</block>
+    		</reference>
+    	</reference>
+	</adminhtml_sales_order_create_index>
+	<adminhtml_sales_order_create_load_block_data>
+    	<reference name="content">
+    		 <reference name="data">
+	    		<block type="adminhtml/sales_order_create_form_account" template="whitepages/order/create/form/account.phtml" name="form_account">
+	    			<block type="whitePages/adminhtml_sales_order_create_form_account_autocomplete" template="whitepages/order/create/form/account/autocomplete.phtml" name="form_account_autocomplete" />
+	    		</block>
+    		</reference>
+    	</reference>
+	</adminhtml_sales_order_create_load_block_data>
+</layout>

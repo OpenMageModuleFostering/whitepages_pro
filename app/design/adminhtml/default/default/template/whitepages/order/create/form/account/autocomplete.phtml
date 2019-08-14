@@ -1,0 +1,125 @@
+<?php
+/**
+ * @category	Wp
+ * @package		Wp_Whitepages
+ * @author		WhitePages <support@whitepages.com>
+ * @copyright	WhitePages Inc. (c) 2013
+ *
+ * THIS SOFTWARE AND RELATED SERVICE IS PROVIDED ON AN “AS IS” BASIS. TO THE FULLEST EXTENT
+ * PERMISSIBLE, WHITEPAGES AND ITS AFFILIATES DISCLAIM ALL WARRANTIES OF ANY KIND, EXPRESS
+ * OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, WARRANTIES OF TITLE, NONINFRINGEMENT AND IMPLIED
+ * WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSEOR THOSE ARISING FROM
+ * COURSE OF DEALING OR USAGE OF TRADE.  WITHOUT LIMITING THE FOREGOING, WHITEPAGES MAKES NO
+ * REPRESENTATIONS THAT (I) THE SOFTWARE OR RELATED SERVICE WILL MEET YOUR REQUIREMENTS OR BE
+ * ACCURATE, COMPLETE, RELIABLE OR ERROR FREE; (II) THAT THE SOFTWARE OR RELATED SERVICE
+ * ALWAYS BE AVAILABLE OR WILL BE UNINTERRUPTED, ACCESSIBLE, TIMELY, RESPONSIVE OR SECURE; OR
+ * (III) THAT ANY DEFECTS WILL BE CORRECTED, OR THAT THE SOFTWARE OR RELATED SERVICE WILL BE
+ * FREE FROM VIRUSES, “WORMS,” “TROJAN HORSES” OR OTHER HARMFUL PROPERTIES.  YOU EXPRESSLY
+ * AGREE THAT USE IS AT YOUR SOLE RISK AND THAT YOU WILL BE SOLELY RESPONSIBLE FOR ANY DAMAGE
+ * TO YOUR COMPUTER SYSTEM OR LOSS OF DATA THAT RESULTS FROM AND FOR ANY DISCLOSURE OF
+ * INFORMATION THAT YOU UNDERTAKE WHILE USING THE SOFTWARE OR RELATED SERVICE.  IN NO EVENT
+ * SHALL WHITEPAGES OR ITS AFFILIATES BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHERLIABILITY,
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,OUT OF OR IN CONNECTION
+ * WITH THE SOFTWARE OR RELATED SERVICE.
+ * 
+ */
+?>
+<div class="entry-edit">
+    <div class="entry-edit-head">
+        <h4 class="icon-head fieldset-legend" ><?php echo $this->__('WhitePages PRO Customer Look Up')?></h4>
+    </div>
+	<div id="whitepages_autocomplete_fields">
+		<fieldset>
+			<div class="hor-scroll form-list">
+				<input type="hidden" id="autocomplete_action" value="<?php echo $this->getUrl('whitePages/adminhtml_index/autocomplete').'&isAjax=true'?>" />
+				<table cellspacing="0" class="box-left" id="phone">
+					<tbody>
+						<tr>
+							<td class="label">
+								<label for="group_id">
+									<?php echo $this->__('Phone Number')?>
+									<span class="required">*</span>
+								</label>
+							</td>
+							<td class="value">
+								<input name="reverse_phone" id="phone_autocomplete" type="text"/>
+							</td>
+						</tr>
+						<tr>
+							<td class="label"></td>
+							<td class="value">
+								<button id="submit_reverse_phone" title="Submit" type="button" class="scalable disabled" onclick="autoCompleteAddress.showAutocompleteResults('phone')" style="">
+									<span>
+										<span>
+											<span><?php echo $this->__('Search Phone')?></span>
+										</span>
+									</span>
+								</button>
+							</td>
+						</tr>
+					</tbody>
+					<table cellspacing="0" class="box-right">
+					<tbody>
+						<tr>
+							<td class="label">
+								<label for="business_autocomplete_name">
+									<?php echo $this->__('Business Name')?>
+									<span class="required">*</span>
+								</label>
+							</td>
+							<td class="value">
+								<input name="find_business_name" id="business_autocomplete_name" type="text"/>
+							</td>
+						</tr>
+						<tr>
+							<td class="label">
+								<label for="business_autocomplete_location">
+									<?php echo $this->__('Business Location')?>
+									<span class="required">*</span>
+								</label>
+							</td>
+							<td class="value">
+								<input name="find_business_location" id="business_autocomplete_location" type="text"/>
+								<p class="note"><span><?php echo $this->__('City, State or Zip')?></span></p>
+							</td>
+						</tr>
+						<tr>
+							<td class="label"></td>
+							<td class="value">
+								<button id="submit_find_business" title="Submit" type="button" class="scalable disabled" onclick="autoCompleteAddress.showAutocompleteResults('business')" style="">
+									<span>
+										<span>
+											<span><?php echo $this->__('Search Business')?></span>
+										</span>
+									</span>
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</fieldset>
+		</div>
+	</div>
+</div>
+<div id="whitepages_autocomplete_fields_modal" class="whitepages-autocomplete-fields" style="display:none;">
+    <div id="search-results"></div>
+</div>
+
+
+
+<script type="text/javascript">
+	//Incase this ia ajax load and there is new html to bind too.
+	var ajaxLoad = <?php echo ($this->getRequest()->getParam('isAjax') != null ? 'true' : 'false') ?>;
+	if( ajaxLoad == true )
+	{
+		autoCompleteAddress.initialize();
+	}
+	
+	var _translateData = {
+	    'Please enter a phone number.':
+	        "<?php echo $this->__('Please enter a phone number.'); ?>",
+	    'Please enter a valid business name and location.':
+	        "<?php echo $this->__('Please enter a valid business name and location.');?>"
+	};
+	var Translator = new Translate(_translateData);
+</script>
