@@ -54,11 +54,20 @@
                     <show_in_website>1</show_in_website>
                     <show_in_store>1</show_in_store>
                     <fields>
+                    	<show_in_order_grid>
+                    		<label>Show in Order Grid</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                    	</show_in_order_grid>
       					<decline>
 							<label>Decline Orders with Scores Below</label>
 							<frontend_type>select</frontend_type>
 							<source_model>whitePages/system_config_source_matchScore</source_model>
-							<sort_order>10</sort_order>
+							<sort_order>20</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
@@ -67,7 +76,7 @@
 						<message>
 							<label>Decline Message</label>
 							<frontend_type>textarea</frontend_type>
-							<sort_order>20</sort_order>
+							<sort_order>30</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>

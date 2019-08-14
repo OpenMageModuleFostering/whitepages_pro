@@ -114,45 +114,54 @@ class Wp_WhitePages_Model_Observer
 	
 	public function orderGridAddMatchScore($observer)
 	{
-		$block = $observer->getBlock();
-        if (!isset($block)) {
-            return $this;
-        }
- 
-        if($block->getId() == 'sales_order_grid')
-        {
-        	$block->addColumnAfter('match_score', array(
-                'header'    => 'MatchScore',
-                'index'     => 'match_score',
-        		'align'     => 'center',
-        		'width' => '75',
-				'renderer'  => 'Wp_WhitePages_Block_Adminhtml_Sales_Order_Grid_Renderer_MatchScore',
-				'filter_index'  => Mage::helper('whitePages')->getMatchScoreExpression('match_score'),
-        		'type'      => 'options',
-                'options'   => Mage::helper('whitePages')->getMatchScoreOptions()
-            ),
-            'grand_total');
-        }
+		$showInOrderGrid = Mage::getStoreConfig('whitePages_configuration/match_score/show_in_order_grid');
+		if($showInOrderGrid == true)
+		{
+			$block = $observer->getBlock();
+	        if (!isset($block)) {
+	            return $this;
+	        }
+	 
+	        if($block->getId() == 'sales_order_grid')
+	        {
+	        	$block->addColumnAfter('match_score', array(
+	                'header'    => 'MatchScore',
+	                'index'     => 'match_score',
+	        		'align'     => 'center',
+	        		'width' => '75',
+					'renderer'  => 'Wp_WhitePages_Block_Adminhtml_Sales_Order_Grid_Renderer_MatchScore',
+					'filter_index'  => Mage::helper('whitePages')->getMatchScoreExpression('match_score'),
+	        		'type'      => 'options',
+	                'options'   => Mage::helper('whitePages')->getMatchScoreOptions(true)
+	            ),
+	            'grand_total');
+	        }
+		}
 	}
 	
 	public function orderGridFilterCiollection($observer)
 	{
-		$block = $observer->getBlock();
-        if (!isset($block)) {
-            return $this;
-        }
- 
-        if($block->getId() == 'sales_order_grid')
-        {
-			$collection = $block->getCollection();
-			$block->getCollection()->addFieldToSelect('match_score');
-		    $collection->getSelect()->columns(array(
-		    		'match_score' => Mage::helper('whitePages')->getMatchScoreExpression('match_score'),
-		    	));
-		    
-	      	$block->setCollection($collection);
-	       
-        }
+		$showInOrderGrid = Mage::getStoreConfig('whitePages_configuration/match_score/show_in_order_grid');
+		
+		if($showInOrderGrid == true)
+		{
+			$block = $observer->getBlock();
+	        if (!isset($block)) {
+	            return $this;
+	        }
+	 
+	        if($block->getId() == 'sales_order_grid')
+	        {
+				$collection = $block->getCollection();
+				$block->getCollection()->addFieldToSelect('match_score');
+			    $collection->getSelect()->columns(array(
+			    		'match_score' => Mage::helper('whitePages')->getMatchScoreExpression('match_score'),
+			    	));
+			    
+		      	$block->setCollection($collection);
+		       
+	        }
+		}
 	}
 	
 }

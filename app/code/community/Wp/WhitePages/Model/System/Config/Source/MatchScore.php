@@ -34,7 +34,7 @@ class Wp_WhitePages_Model_System_Config_Source_MatchScore
      */
     public function toOptionArray()
     {
-        return (array(0=>Mage::helper('adminhtml')->__('Accept All Orders')) + Mage::helper('whitePages')->getMatchScoreOptions() );
+        return (array(0=>Mage::helper('adminhtml')->__('Accept All Orders')) + Mage::helper('whitePages')->getMatchScoreOptions(true) );
     }
 
     /**

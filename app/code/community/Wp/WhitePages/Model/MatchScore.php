@@ -130,4 +130,27 @@ class Wp_WhitePages_Model_MatchScore extends Mage_Core_Model_Abstract
 	{
 		return json_decode($this->getResult() ,true);
 	}
+	
+	public function getMessagesString($type,$fieldKey,$grade)
+	{
+		$detailedMatchScore = $this->getDetailedMatchScore();
+		$hasLabelValue = Mage::helper('whitePages')->getMatchScoreOptionsLabel($grade , $fieldKey );
+
+		if( ($fieldKey != 'phone_type')  || ($fieldKey == 'phone_type' &&  $hasLabelValue == null) )
+		{
+			$messages = $detailedMatchScore[$type][$fieldKey]['messages'];
+	    	foreach ( $messages as $key => $message)
+	    	{
+	    		$pos = strripos( $message, 'but' );
+	    		if($pos != null)
+	    		{
+		    		$first = substr( $message, 0, $pos );
+	    			$second = substr( $message, $pos );
+		    		$messages[$key] = $first."<br>".$second;
+	    		}
+	    	}
+		}
+			
+	    return $messages;
+	}
 }

@@ -71,77 +71,80 @@
 				
 			</fieldset>
 		</div>
-		<div class="entry-edit">
-			<div class="entry-edit-head">
-				<h4 class="icon-head"><?php echo $this->__('Match Details')?></h4>
-			</div>
-			<fieldset>
-				<div class="box-left">
-					<table cellspacing="2" class="data">
-						<tbody>
-							<tr>
-								<td style="width: 150px;"><strong><?php echo $this->__('Billing Info')?></strong></td>
-								<td style="width: 25px;"></td>
-								<td></td>
-							</tr>
-							<?php foreach ($detailedMatchScore['billing'] as $key => $value):?>
-								<?php if($key !='family'): //removing family temporarily until the data gets fixed in the WP API  ?>
-									<tr>
-										<td><?php echo $this->getMatchScoreLabel($key)?></td>
-										<?php if($key =='family'):?>
-											<td><strong><?php echo count($value['names'])?></strong></td>
-											<td><?php echo (count($value['names']) > 1 ? " (". $this->getFamilyNames($value['names']). ")": '')?></td>
-										<?php else :?>
-											<td><strong class="grade-<?php echo $value['grade'] ?>"><?php echo $value['grade']?></strong></td>
-											<td><?php echo ($value['messages'] != null ? " (". implode(',', $value['messages']).")" : '')?></td>
-										<?php endif;?>
-									</tr>
-								<?php endif;?>
-							<?php endforeach;?>
-							<tr>
-								<td><br /></td>
-								<td> </td></tr>
-							<tr>
-								<td><strong><?php echo $this->__('Shipping Info')?></strong></td>
-								<td></td>
-							</tr>
-							<?php foreach ($detailedMatchScore['shipping'] as $key => $value):?>
-							
-								<?php if($key !='family'): //removing family temporarily until the data gets fixed in the WP API  ?>
-									<tr>
-										<td><?php echo $this->getMatchScoreLabel($key)?></td>
-										<?php if($key =='family'):?>
-											<td><strong><?php echo count($value['names'])?></strong></td>
-											<td><?php echo (count($value['names']) > 1 ? " (". $this->getFamilyNames($value['names']). ")": '')?></td>
-										<?php else :?>
-											<td><strong class="grade-<?php echo $value['grade'] ?>"><?php echo $value['grade']?></strong></td>
-											<td><?php echo ($value['messages'] != null ? " (". implode(',', $value['messages']).")" : '')?></td>
-										<?php endif;?>
-									</tr>
-								<?php endif;?>
-							<?php endforeach;?>
-						</tbody>
-					</table>
+		<div class="box-left">
+			<div class="entry-edit">
+				<div class="entry-edit-head">
+					<h4 class="icon-head"><?php echo $this->__('Billing Info')?></h4>
 				</div>
-			</fieldset>
-		</div>
-		<div class="entry-edit">
-			<div class="entry-edit-head">
-				<h4 class="icon-head"><?php echo $this->__('Transaction Details')?></h4>
+				<fieldset>
+					<ul>
+						<?php foreach ($detailedMatchScore['billing'] as $key => $value):?>
+							<?php if($key !='family'): //removing family temporarily until the data gets fixed in the WP API  ?>
+								<li>
+									<strong><?php echo $this->getMatchScoreLabel($key)?>: <span class="grade-<?php echo $value['grade'] ?>"><?php echo Mage::helper('whitePages')->getMatchScoreOptionsLabel( $value['grade'], $key ) ?></strong>
+									<?php if($key =='family'):?>
+										<ul>
+										<li><strong><?php echo count($value['names'])?></strong></li>
+										<li><?php echo (count($value['names']) > 1 ?  $this->getFamilyNames($value['names']) : '')?></li>
+										</ul>
+									<?php else :?>
+										<ul>
+											<li><?php echo ($value['messages'] != null ? implode(',', $matchSCore->getMessagesString('billing', $key, $value['grade']) )  : '')?></li>
+										</ul>
+									<?php endif;?>
+								</li>
+							<?php endif;?>
+						<?php endforeach;?>
+					</ul>
+				</fieldset>
 			</div>
-			<fieldset>
-				<div class="box-left">
-					<table cellspacing="2" class="data">
-						<tbody>
-							<tr>
-								<td style="width: 150px;"><?php echo $this->__('Transaction Id')?></td>
-								<td><?php echo $transactionDetails['transaction_id'] ?></td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</fieldset>
 		</div>
+		<div class="box-right">
+			<div class="entry-edit">
+				<div class="entry-edit-head">
+					<h4 class="icon-head"><?php echo $this->__('Shipping Info')?></h4>
+				</div>
+				<fieldset>
+					<ul>
+						<?php foreach ($detailedMatchScore['shipping'] as $key => $value):?>
+							<?php if($key !='family'): //removing family temporarily until the data gets fixed in the WP API  ?>
+								<li>
+									<strong><?php echo $this->getMatchScoreLabel($key)?>: <span class="grade-<?php echo $value['grade'] ?>"><?php echo Mage::helper('whitePages')->getMatchScoreOptionsLabel( $value['grade'], $key ) ?></strong>
+									<?php if($key =='family'):?>
+										<ul>
+											<li><strong><?php echo count($value['names'])?></strong></li>
+											<li><?php echo (count($value['names']) > 1 ?  $this->getFamilyNames($value['names']) : '')?></li>
+										</ul>
+									<?php else:?>
+										<ul>
+											<li><?php echo ($value['messages'] != null ? implode(',', $matchSCore->getMessagesString('shipping', $key, $value['grade']) ) : '')?></li>
+										</ul>
+									<?php endif;?>
+								</li>
+							<?php endif;?>
+						<?php endforeach;?>
+					</ul>
+				</fieldset>
+			</div>
+		</div>
+		<div class="clear"></div>
+			<div class="entry-edit">
+				<div class="entry-edit-head">
+					<h4 class="icon-head"><?php echo $this->__('Transaction Details')?></h4>
+				</div>
+				<fieldset>
+					<div class="">
+						<table cellspacing="2" class="data">
+							<tbody>
+								<tr>
+									<td style="width: 150px;"><?php echo $this->__('Transaction Id')?></td>
+									<td><?php echo $transactionDetails['transaction_id'] ?></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</fieldset>
+			</div>
 	<?php else:?>
 		<h1 class=""><?php echo $this->__('No MatchScore Available')?></h1>
 		<p><?php echo $this->__('This order was created prior to the WhitePages PRO module being installed.')?></p>

@@ -121,9 +121,9 @@ class Wp_WhitePages_Block_Adminhtml_Sales_Order_Tab_MatchScore extends Mage_Admi
 	    public function getMatchScoreLabel($labelKey)
 	    {
 	    	$labelArray = array(
-		    					'phone_name'	=> $this->__('Phone-Name Score'),
-								'address_name'	=> $this->__('Address-Name Score'),
-								'deliverable'	=> $this->__('Deliverable Score'),
+		    					'phone_name'	=> $this->__('Phone-to-Name'),
+								'address_name'	=> $this->__('Address-to-Name'),
+								'deliverable'	=> $this->__('Address Status'),
 	    						'family'		=> $this->__('Family Count'),
 		    					'spam'			=> $this->__('Phone Spam Score'),
 	    						'phone_type'	=> $this->__('Phone Type')
@@ -145,7 +145,7 @@ class Wp_WhitePages_Block_Adminhtml_Sales_Order_Tab_MatchScore extends Mage_Admi
 	    {
 	    	return $this->_matchScore->getTransactionDetails();
 	    }
-	    
+
 	    
 	    /**
 	     * ######################## TAB settings #################################

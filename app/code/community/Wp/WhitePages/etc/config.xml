@@ -2,7 +2,7 @@
 <config>
   <modules>
     <Wp_WhitePages>
-      <version>1.0.0</version>
+      <version>1.1.0</version>
     </Wp_WhitePages>
   </modules>
   <frontend>
@@ -175,6 +175,7 @@
 				<match_score>
 					<decline>0</decline>
 					<message>Your order has been declined because of an issue with your billing or shipping information. Please contact us to complete your order.</message>
+					<show_in_order_grid>2</show_in_order_grid>
 				</match_score>
 				<reverse_lookup>
 					<enabled>1</enabled>

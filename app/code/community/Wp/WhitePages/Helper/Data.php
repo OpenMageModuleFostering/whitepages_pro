@@ -41,17 +41,49 @@ class Wp_WhitePages_Helper_Data extends Mage_Core_Helper_Abstract
 	 * 
 	 */
 	
-	public function getMatchScoreOptions()
+	public function getMatchScoreOptions($select=false)
 	{
-		$grades = range('A', 'F');
-		$matchScoresOptionArray = array();
-		
-		foreach ($grades as $key => $value)
-		{			
-			$matchScoresOptionArray[$value] = $value;
+		if($select == false)
+		{
+			$matchScoresOptionArray = array(
+										'A'=> $this->__('Match'),
+										'B'=> $this->__('Near Match'),
+										'C'=> $this->__('Near Match'),
+										'D'=> $this->__('Poor Match'),
+										'E'=> $this->__('Poor Match'),
+										'F'=> $this->__('No Match')
+									);
 		}
-		
+		else
+		{
+			$grades = range('A', 'F');
+	
+			foreach ($grades as $key => $value)
+			{			
+				$matchScoresOptionArray[$value] = $value;
+			}
+		}
 		return $matchScoresOptionArray;
+	}
+	
+	public function getMatchScoreAddressOptions()
+	{
+		$matchScoreAddressOptionsArray = array(
+									'A'=> $this->__('Receiving Mail'),
+									'F'=> $this->__('Not Receiving Mail ')
+								);
+
+		return $matchScoreAddressOptionsArray;
+	}
+	
+	public function getMatchScorePhoneOptions()
+	{
+		$matchScoresPhoneOptionsArray = array(
+										'A'=> $this->__('Mobile or Landline'),
+										'F'=> $this->__('Non-fixed VoIP')
+									);
+
+		return $matchScoresPhoneOptionsArray;
 	}
 	
 	public function isScoreDeclined($grade)
@@ -77,4 +109,32 @@ class Wp_WhitePages_Helper_Data extends Mage_Core_Helper_Abstract
             return 0;
     }
 	
+    public function getMatchScoreOptionsLabel($grade, $key)
+    {
+    	switch ($key)
+    	{
+    		case "phone_type":
+    			$matchScoreOptions = $this->getMatchScorePhoneOptions();
+    			break;
+    		case "deliverable":
+    			$matchScoreOptions = $this->getMatchScoreAddressOptions();
+    			break;
+    		default:
+    			$matchScoreOptions = $this->getMatchScoreOptions();
+    			break;
+    		
+    	}
+    	
+    	$matchScoreOptionsLabel = ( isset($matchScoreOptions[$grade]) ? $matchScoreOptions[$grade] : null);
+    	
+    	if( $grade == null)
+    	{
+    		$matchScoreOptionsLabel = $this->__('n/a');
+    	}elseif($matchScoreOptionsLabel == null)
+    	{
+    		$matchScoreOptionsLabel = $grade;
+    	}
+    	
+    	return $matchScoreOptionsLabel;
+    }
 }

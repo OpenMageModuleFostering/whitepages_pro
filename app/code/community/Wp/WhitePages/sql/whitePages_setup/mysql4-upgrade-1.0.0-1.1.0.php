@@ -1,3 +1,4 @@
+<?php
 /**
  * @category	Wp
  * @package		Wp_Whitepages
@@ -23,111 +24,10 @@
  * 
  */
 
-/* Styles For Autocomplete */
+$installer = $this;
 
-.whitepages-autocomplete-fields
-{
-	background: #fafafa;
-	border: 1px solid #d6d6d6;
-	left: 50%;
-	margin: 0 0 0 -325px;
-	position: fixed;
-	top: 50%;
-	width: 650px;
-	z-index: 400;
-}
+$installer->startSetup();
 
-.whitepages-autocomplete-fields .grid
-{
-	height: 310px;
-	overflow-y: scroll;
-}
+$installer->run("ALTER TABLE {$this->getTable('wp_match_score')} ADD KEY `order_id` (`order_id`);");
 
-.whitepages-autocomplete-fields .send-autocomplete
-{
-	width: 100px;
-	vertical-align: middle;
-}
-
-.whitepages-autocomplete-fields .close
-{
-	margin-left: 20px;
-}
-
-/* Styles for MatchScore */
-
-
-.grade-A, .grade-B, .grade-C, .grade-D, .grade-E, .grade-F, .grade-
-{
-	text-transform: uppercase;
-}
-.grade-A
-{
-	color:green;
-}
-
-.grade-B,.grade-C
-{
-	color:black;
-}
-
-.grade-D, .grade-E, .grade-F
-{
-	color:red;
-}
-
-
-.matchscore .overall-grade
-{
-	width: 215px; 
-}
-
-.matchscore .overall-grade div
-{
-	width: 200px; 
-	height: 75px; 
-	background-color: lightgray; 
-	text-align: center; 
-	line-height: 75px; 
-	-moz-border-radius: 10px; 
-	-webkit-border-radius: 10px; 
-	-khtml-border-radius: 10px; 
-	border-radius: 10px;
-}
-
-.matchscore .overall-grade div span
-{
-	font-size: 40px;
-	font-weight: bold;
-}
-
-.columns .matchscore .form-list 
-{
-	width: 100%;
-}
-.matchscore td
-{
-	padding-bottom: 5px;
-}
-
-.matchscore td.label
-{
-	width: 75px;
-}
-
-.matchscore .wp-logo
-{
-	position: relative;
-	top: -15px;
-	width: 263px;
-}
-
-.matchscore .wp-logo img
-{
-	float: right;
-}
-
-.matchscore fieldset ul li
-{
-	margin-left: 10px;
-}
+$installer->endSetup(); 
